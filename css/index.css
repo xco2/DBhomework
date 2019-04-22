@@ -1,0 +1,99 @@
+body{
+    font-size: 20px;
+}
+#top-mian{
+    background-color: #ffffff;
+    width: 100%;
+}
+
+#title_name{
+    font-size: 1em;
+    float: left;
+}
+
+#left-main{
+    border-top: 2px solid #c7e9ff;
+    background: linear-gradient(to bottom, #ffffff 0%, #c7e9ff 100%);
+    float: left;
+    width: 9%;
+}
+#right-main{
+    float: right;
+    width: 91%;
+}
+/*登录*/
+#login{
+    font-family: "黑体";
+    font-size: 1.15em;
+    color:black;
+    text-align: center;
+    height: 100%;
+    width: 3em;
+    float: right;
+    margin-right: 10px;
+}
+
+.fagucan{
+    color:black;
+    width: 100%;
+    height: 3em;
+    border-bottom: 1px solid #c7e9ff;
+    font-family: "Microsoft New Tai Lue";
+    font-size: 1.3em;
+    text-align: center;
+    line-height: 3em;
+}
+.fagucan:hover{
+    background-color: #97ddff !important;
+}
+
+#r-table{
+    height: 95%;
+    border:3px solid #c7e9ff;
+    /*border:3px solid #ff0027;*/
+    border-bottom: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#r-table::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 15px;     /*高宽分别对应横竖滚动条的尺寸*/
+}
+#r-table::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 15px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #89f3ff;
+}
+
+#r-form{
+    height: 95%;
+    border:3px solid #c7e9ff;
+    /*border:3px solid #ff0027;*/
+    border-bottom: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#r-form::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 15px;     /*高宽分别对应横竖滚动条的尺寸*/
+}
+#r-form::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 15px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #89f3ff;
+}
+
+#r-bottom{
+    width: 100%;
+    height: 5%;
+    background-color: #c7e9ff;
+    border-left: 2px solid #c7e9ff;
+}
+#number{
+    float: right;
+    margin-right: 1.5em;
+}
+#get_div{
+    width: 400px;
+    height: 100%;
+    color: #ff536f;
+    float: left;
+}
