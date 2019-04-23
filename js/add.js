@@ -27,15 +27,15 @@ var change_right_mian = function(str,alter){
     $("#customer").css("background-color","transparent");
     $("#invoice").css("background-color","transparent");
     if(str=="detailed_invoice"){//跳转到发票详细信息
-        var divdata = $.ajax({url:"./change/"+str,async:false});
+        var divdata = $.ajax({url:"change/"+str+".php",async:false});
         $("#r-form").html(divdata.responseText);
         str="invoice";
     }else{//跳转到添加其他信息
         var divdata;
         if(alter==-1){
-            divdata = $.ajax({url:"./change/add"+str,async:false});
+            divdata = $.ajax({url:"change/add"+str+".php",async:false});
         }else{
-            divdata = $.ajax({url:"./change/add"+str+"?no="+alter,async:false});
+            divdata = $.ajax({url:"change/add"+str+".php?no="+alter,async:false});
         }
         $("#r-form").html(divdata.responseText);
     }

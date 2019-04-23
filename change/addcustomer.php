@@ -18,7 +18,7 @@ if(isset($_GET['no'])){
     mysqli_set_charset($conn,'utf8');
     if ($conn) {
         mysqli_select_db($conn, 'b_xal0jvolhi6yzd') or die('指定的数据库不存在');
-        $sql = "SELECT * FROM Customer WHERE cno=".$_GET['no'].";";
+        $sql = "SELECT * FROM customer WHERE cno=".$_GET['no'].";";
         $amount = mysqli_query($conn, $sql);
         $row = mysqli_fetch_row($amount);
         echo "<script>set_input_value(".$row[0].",\"".$row[1]."\",\"".$row[3]."\",\"".$row[2]."\");</script>";
@@ -124,9 +124,9 @@ if(isset($_GET['no'])){
         if(allright==3) {
             var theurl;
             if(alter!=-1){
-                theurl='./change/addcust_toDB.php?cno='+alter;
+                theurl='change/addcust_toDB.php?cno='+alter;
             }else{
-                theurl='./change/addcust_toDB.php';
+                theurl='change/addcust_toDB.php';
             }
             $.ajax({
                 url: theurl,

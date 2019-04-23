@@ -16,7 +16,7 @@
     <div id="invoice" class="fagucan" onclick="change_right_mian('invoice',-1)">发票</div>
     <div id="product" class="fagucan" onclick="change_right_mian('product',-1)">产品</div>
     <div id="customer" class="fagucan" onclick="change_right_mian('customer',-1)">顾客</div>
-    <div id="back" class="fagucan"><a href="index.html"><div>返回查看</div></a></div>
+    <div id="back" class="fagucan"><a href="./"><div>返回查看</div></a></div>
 </div>
 <div id="right-main">
     <div id="r-form"></div>

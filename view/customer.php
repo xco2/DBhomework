@@ -3,7 +3,7 @@ $conn = mysqli_connect('b-xal0jvolhi6yzd.bch.rds.gz.baidubce.com:3306', 'b_xal0j
 mysqli_set_charset($conn,'utf8');
 if ($conn) {
 mysqli_select_db($conn, 'b_xal0jvolhi6yzd') or die('指定的数据库不存在');
-    $sql="SELECT * FROM Customer;";
+    $sql="SELECT * FROM customer;";
 
     $amount =mysqli_query($conn, $sql);
     $row = mysqli_fetch_row($amount);

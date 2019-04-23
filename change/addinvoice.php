@@ -4,7 +4,7 @@
         var cno = document.getElementById("cno");
         var ccmp = document.getElementById("ccmp");
         var Ppaid = document.getElementById("Ppaid");
-        var divdata = $.ajax({url:"./change/checkcname?cno="+cno_v,async:false});
+        var divdata = $.ajax({url:"change/checkcname.php?cno="+cno_v,async:false});
         $("#cname").html(divdata.responseText);
         cno.value=cno_v;
         ccmp.value=ccmp_v;
@@ -112,7 +112,7 @@ if(isset($_GET['no'])){
 <script>
     $('#cno').bind('input propertychange', function() {
         if(this.value){
-            var divdata = $.ajax({url:"./change/checkcname?cno="+this.value,async:false});
+            var divdata = $.ajax({url:"change/checkcname?cno="+this.value,async:false});
             $("#cname").html(divdata.responseText);
         }else{
             $("#cname").html("..");
@@ -122,7 +122,7 @@ if(isset($_GET['no'])){
     var goto_detailed_invoice=function () {
 
         $("#invoice").css("background-color","#97ddff");
-        var divdata = $.ajax({url:"./change/detailed_invoice.php",async:false});
+        var divdata = $.ajax({url:"change/detailed_invoice.php",async:false});
         $("#r-form").html(divdata.responseText);
     }
     var submitpro=function () {
@@ -162,9 +162,9 @@ if(isset($_GET['no'])){
         if(allright==4){
             var theurl;
             if(alter!=-1){
-                theurl='./change/addinvo_toDB.php?ino='+alter;
+                theurl='change/addinvo_toDB.php?ino='+alter;
             }else{
-                theurl='./change/addinvo_toDB.php';
+                theurl='change/addinvo_toDB.php';
             }
             $.ajax({
                 url: theurl,

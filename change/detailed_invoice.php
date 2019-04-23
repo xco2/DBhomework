@@ -109,15 +109,15 @@
     var data=document.getElementById("get_div").innerHTML;
     var data_arr=data.split(",");
     var ino=data_arr[1].split(":");//把ino切出来
-    var divdata = $.ajax({url:"./view/v_det_invoice.php?ino="+ino[1],async:false});
+    var divdata = $.ajax({url:"view/v_det_invoice.php?ino="+ino[1],async:false});
     $("#look_det").html(divdata.responseText);
-    var divdata = $.ajax({url:"./view/product.php?alter=0",async:false});
+    var divdata = $.ajax({url:"view/product.php?alter=0",async:false});
     $("#show_product").html(divdata.responseText);
     $("#show_product").height($("#form_ofc").outerHeight());
 
     $('#pno').bind('input propertychange', function() {
         if(this.value){
-            var divdata = $.ajax({url:"./change/checkproduct?pno="+this.value,async:false});
+            var divdata = $.ajax({url:"change/checkproduct?pno="+this.value,async:false});
             $("#pname").html(divdata.responseText);
         }else{
             $("#pname").html("..");
@@ -154,7 +154,7 @@
         }
         if(allright == 3){
             $.ajax({
-                url: './change/add_det_inv_toDB.php',
+                url: 'change/add_det_inv_toDB.php',
                 type: 'post',
                 timeout: 180000,
                 data: "ino="+ino[1]+"&pno="+pno.value+"&pay_amount="+pay_amount.value,
@@ -163,7 +163,7 @@
                     get_div.innerHTML=data;
                     pno.value="";
                     pay_amount.value="";
-                    var divdata = $.ajax({url:"./view/v_det_invoice?ino="+ino[1],async:false});
+                    var divdata = $.ajax({url:"view/v_det_invoice?ino="+ino[1],async:false});
                     $("#look_det").html(divdata.responseText);
                 },
                 error: function (res, error) {
