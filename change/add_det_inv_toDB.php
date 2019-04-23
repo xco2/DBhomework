@@ -20,8 +20,9 @@ if(isset($_POST)){
             $amount =mysqli_query($conn, $sql)or die('指定的数据不存在');
             $row = mysqli_fetch_row($amount);
             $this_payment=(int)$row[0]*(int)$pay_amount;
-            $sql="UPDATE invoice,product SET Payment=Payment+".$this_payment.",Pamount=Pamount-".$pay_amount." WHERE Ino=".$ino.";";//修改订单的总金额
-            if(mysqli_query($conn, $sql)){
+            $sql="UPDATE invoice SET Payment=Payment+".$this_payment." WHERE Ino=".$ino.";";//修改订单的总金额
+            $sql_1="UPDATE product SET Pamount=Pamount-".$pay_amount." WHERE Pno=".$pno.";";//修改货存
+            if(mysqli_query($conn, $sql)&&mysqli_query($conn, $sql_1)){
                 echo "录入成功";
             }else{
                 echo "录入失败1";

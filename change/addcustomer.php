@@ -107,7 +107,7 @@ if(isset($_GET['no'])){
             cname.style.borderColor="black";
             allright++;
         }
-        if (!ctel.value || ctel.value.length != 11) {
+        if (!ctel.value || ctel.value.length != 11 || (""+parseInt(ctel.value)).length!=11) {
             ctel.style.borderColor="#ff536f";
             get_div.innerHTML="*请将电话填写完整";
         }else{
@@ -136,6 +136,9 @@ if(isset($_GET['no'])){
                 success: function (data) {
                     alert(data);
                     get_div.innerHTML=data;
+                    cname.value="";
+                    ctel.value="";
+                    caddress.value="";
                 },
                 error: function (res, error) {
                     alert('发生错误');

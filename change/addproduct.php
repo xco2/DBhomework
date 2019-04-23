@@ -160,6 +160,10 @@ if(isset($_GET['no'])){
                 success: function (data) {
                     alert(data);
                     get_div.innerHTML=data;
+                    pname.value="";
+                    psize.value="";
+                    pprice.value="";
+                    pamount.value="";
                 },
                 error: function (res, error) {
                     alert('发生错误');

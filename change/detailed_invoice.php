@@ -18,18 +18,41 @@
         <button onclick="submitpro()">提交</button>
     </form>
 </div>
+<div id="show_product">
+
+</div>
 <div id="look_det">
 
 </div>
 <style>
     #form_ofc{
-        margin:auto;
-        margin-top: 50px;
+        margin-top: 25px;
         padding: 5%;
         height: auto;
         width: 60%;
         border:3px solid #c7e9ff;
         border-radius: 15px;
+        float: left;
+        display: block;
+    }
+    #show_product{
+        margin-top: 25px;
+        height: auto;
+        width: 28%;
+        border:3px solid #c7e9ff;
+        border-radius: 15px;
+        float: right;
+        display: block;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    #show_product::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 15px;     /*高宽分别对应横竖滚动条的尺寸*/
+    }
+    #show_product::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 15px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: #89f3ff;
     }
     #look_det{
         height: auto;
@@ -86,8 +109,11 @@
     var data=document.getElementById("get_div").innerHTML;
     var data_arr=data.split(",");
     var ino=data_arr[1].split(":");//把ino切出来
-    var divdata = $.ajax({url:"./view/v_det_invoice?ino="+ino[1],async:false});
+    var divdata = $.ajax({url:"./view/v_det_invoice.php?ino="+ino[1],async:false});
     $("#look_det").html(divdata.responseText);
+    var divdata = $.ajax({url:"./view/product.php?alter=0",async:false});
+    $("#show_product").html(divdata.responseText);
+    $("#show_product").height($("#form_ofc").outerHeight());
 
     $('#pno').bind('input propertychange', function() {
         if(this.value){
@@ -135,6 +161,8 @@
                 success: function (dataout) {
                     alert(dataout);
                     get_div.innerHTML=data;
+                    pno.value="";
+                    pay_amount.value="";
                     var divdata = $.ajax({url:"./view/v_det_invoice?ino="+ino[1],async:false});
                     $("#look_det").html(divdata.responseText);
                 },

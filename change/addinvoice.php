@@ -120,6 +120,7 @@ if(isset($_GET['no'])){
     });
     //输入订单完成后跳转
     var goto_detailed_invoice=function () {
+
         $("#invoice").css("background-color","#97ddff");
         var divdata = $.ajax({url:"./change/detailed_invoice.php",async:false});
         $("#r-form").html(divdata.responseText);

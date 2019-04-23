@@ -15,11 +15,13 @@ if ($conn) {
             <td>规格</td>
             <td>单价(元)</td>
             <td>库存数量
+                <?php if(!isset($_GET['alter'])){?>
                 <div class="alter_bot">
                     <a href="../add.php?choic=product">增添
 <!--                     <!--<img src="" alt="">-->
                     </a>
                 </div>
+                <?php }?>
             </td>
         </thead>
         <?php
@@ -31,7 +33,15 @@ if ($conn) {
                 <td><?php echo $row[1]?></td>
                 <td><?php echo $row[2]?></td>
                 <td><?php echo $row[3]?></td>
-                <td><?php echo $row[4]?><div class="alter_bot"><a <?php echo "href=\"./add.php?choic=product&no=".$row[0]."\""?>>修改</a></div></td>
+                <td><?php echo $row[4];
+                if(!isset($_GET['alter'])){?>
+                    <div class="alter_bot">
+                        <a <?php echo "href=\"./add.php?choic=product&no=".$row[0]."\""?>>修改</a>
+                    </div>
+                <?php
+                }
+                ?>
+                </td>
             </tr>
             <?php
             $row = mysqli_fetch_row($amount);
@@ -73,6 +83,8 @@ if ($conn) {
     }
 </style>
 <script>
-    var str="共 ";
-    document.getElementById("number").innerText=str+<?php echo $i-1?>+" 项";
+    <?php if(!isset($_GET['alter'])){?>
+        var str="共 ";
+        document.getElementById("number").innerText=str+<?php echo $i-1?>+" 项";
+    <?php }?>
 </script>

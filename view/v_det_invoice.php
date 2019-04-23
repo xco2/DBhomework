@@ -15,24 +15,48 @@ if ($conn) {
     <td>产品名称</td>
     <td>购买数量</td>
     <td>单价</td>
+    <td>小计</td>
     </thead>
     <?php
     $i=1;
-    while($row != null){
+        while($row != null){
+            ?>
+            <tr <?php if($i%2==0){echo "class=\"dan\"";}?>>
+                <td class="num"><?php echo $i?></td>
+                <td><?php echo $row[0]?></td>
+                <td><?php echo $row[1]?></td>
+                <td><?php echo $row[2]?></td>
+                <td><?php echo $row[3]?></td>
+                <td><?php echo $row[3]*$row[2]?></td>
+            </tr>
+            <?php
+            $row = mysqli_fetch_row($amount);
+            $i++;
+        }
+    $sql="SELECT Ino,invoice.Cno,customer.Cname,Itime,Payment,Ccpm,Ppaid FROM invoice,customer WHERE invoice.Cno=customer.Cno AND invoice.ino=".$_GET['ino'].";";
+    $amount =mysqli_query($conn, $sql)or die('指定的数据不存在');
+    $row = mysqli_fetch_row($amount);
         ?>
-
-        <tr <?php if($i%2==0){echo "class=\"dan\"";}?>>
-            <td class="num"><?php echo $i?></td>
-            <td><?php echo $row[0]?></td>
-            <td><?php echo $row[1]?></td>
-            <td><?php echo $row[2]?></td>
-            <td><?php echo $row[3]?></td>
+        <tr></tr>
+        <tr><td>订单信息</td></tr>
+        <tr class="dan">
+            <td class="num">客户号</td>
+            <td>客户姓名</td>
+            <td>开发日期</td>
+            <td>应付金额</td>
+            <td>预付款</td>
+            <td>已付金额</td>
         </tr>
-        <?php
-        $row = mysqli_fetch_row($amount);
-        $i++;
-    }
-    }
+    <tr>
+        <td class="num"><?php echo $row[1]?></td>
+        <td><?php echo $row[2]?></td>
+        <td><?php echo $row[3]?></td>
+        <td><?php echo $row[4]?></td>
+        <td><?php echo $row[5]?></td>
+        <td><?php echo $row[6]?></td>
+    </tr>
+    <?php
+    }//if的结束
     ?>
 </table>
 <style>
