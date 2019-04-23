@@ -1,12 +1,12 @@
 <?php
 if(isset($_POST)){
-    $conn = mysqli_connect('localhost', 'root', '');
+    $conn = mysqli_connect('b-xal0jvolhi6yzd.bch.rds.gz.baidubce.com:3306', 'b_xal0jvolhi6yzd', 'MY!!ZOMBIELANDSAGA!SQL#');
     mysqli_set_charset($conn,'utf8');
     if ($conn) {
+        mysqli_select_db($conn, 'b_xal0jvolhi6yzd') or die('指定的数据库不存在');
         $ino=$_POST['ino'];
         $pno=$_POST['pno'];
         $pay_amount=$_POST['pay_amount'];
-        mysqli_select_db($conn, 'production_marketing') or die('指定的数据库不存在');
 
         $sql_1="SELECT Pno FROM invoice_product WHERE Pno=".$pno." AND Ino=".$ino.";";
         $sql ="INSERT INTO invoice_product(Ino,Pno,Pay_amount) VALUES (".$ino.",".$pno.",".$pay_amount.");";
