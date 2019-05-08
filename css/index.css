@@ -7,13 +7,15 @@ body{
 }
 
 #title_name{
+    margin-left: 20px;
+    margin-top: 4px;
     font-size: 1em;
     float: left;
 }
 
 #left-main{
-    border-top: 2px solid #c7e9ff;
-    background: linear-gradient(to bottom, #ffffff 0%, #c7e9ff 100%);
+    border-top: 1px solid #d3d3d3;
+    background: linear-gradient(to bottom, #ffffff 0%, #bebebe 100%);
     float: left;
     width: 9%;
 }
@@ -37,19 +39,19 @@ body{
     color:black;
     width: 100%;
     height: 3em;
-    border-bottom: 1px solid #c7e9ff;
+    border-bottom: 1px solid #d3d3d3;
     font-family: "Microsoft New Tai Lue";
     font-size: 1.3em;
     text-align: center;
     line-height: 3em;
 }
 .fagucan:hover{
-    background-color: #97ddff !important;
+    background-color: #bebebe !important;
 }
 
 #r-table{
     height: 95%;
-    border:3px solid #c7e9ff;
+    border:2px solid #e2e2e2;
     /*border:3px solid #ff0027;*/
     border-bottom: 0px;
     overflow-y: auto;
@@ -61,12 +63,12 @@ body{
 #r-table::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
     border-radius: 15px;
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: #89f3ff;
+    background: #515152;
 }
 
 #r-form{
     height: 95%;
-    border:3px solid #c7e9ff;
+    border:3px solid #d3d3d3;
     /*border:3px solid #ff0027;*/
     border-bottom: 0px;
     overflow-y: auto;
@@ -78,14 +80,14 @@ body{
 #r-form::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
     border-radius: 15px;
     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: #89f3ff;
+    background: #515152;
 }
 
 #r-bottom{
     width: 100%;
     height: 5%;
-    background-color: #c7e9ff;
-    border-left: 2px solid #c7e9ff;
+    background-color: #bebebe;
+    border-left: 2px solid #bebebe;
 }
 #number{
     float: right;

@@ -3,13 +3,13 @@ $conn = mysqli_connect('localhost', 'root', '');
 mysqli_set_charset($conn,'utf8');
 if ($conn) {
     mysqli_select_db($conn, 'production_marketing') or die('指定的数据库不存在');
-    $sql="SELECT * FROM Customer;";
+    $sql="SELECT * FROM Customer ORDER BY cno";
 
     $amount =mysqli_query($conn, $sql);
     $row = mysqli_fetch_row($amount);
     ?>
 
-    <table id="tablehead">
+    <table id="nomal">
         <thead class="dan">
             <td class="num">客户号</td>
             <td>姓名</td>
@@ -17,9 +17,8 @@ if ($conn) {
             <td>电话</td>
             <td>信用状况
                 <div class="alter_bot">
-                    <a href="../add.php?choic=customer">增添
-                        <!--<img src="" alt="">-->
-                    </a>
+                    <div onclick="change_right_mian('customer_view')">总交易额排行</div>
+                    <a href="search.php?choic=customer">筛选</a>
                 </div>
             </td>
         </thead>
@@ -32,7 +31,12 @@ if ($conn) {
                 <td><?php echo $row[1]?></td>
                 <td><?php echo $row[2]?></td>
                 <td><?php echo $row[3]?></td>
-                <td><?php echo $row[4]?><div class="alter_bot"><a <?php echo "href=\"./add.php?choic=customer&no=".$row[0]."\""?>>修改</a></div></td>
+                <td><?php echo $row[4]?>
+                    <div class="alter_bot">
+                        <a <?php echo "href=\"./add.php?choic=customer&no=".$row[0]."\""?>>修改</a>
+                        <a <?php echo "href=\"./add.php?choic=invoice&withcust=1&no=".$row[0]."\""?>>&nbsp开发票</a>
+                    </div>
+                </td>
             </tr>
             <?php
             $row = mysqli_fetch_row($amount);
@@ -46,7 +50,7 @@ if ($conn) {
     td{
         height: 2em;
         width: 20em;
-        border:1px solid #c7e9ff;
+        border:1px solid #d3d3d3;
         padding: 0;
     }
     .num{
@@ -57,13 +61,13 @@ if ($conn) {
         width: auto;
     }
     tr:hover{
-        background-color: #97ddff !important;
+        background-color: #bebebe !important;
     }
     thead{
-        background-color: #97ddff !important;
+        background-color: #bebebe !important;
     }
     .dan{
-        background-color: #def3ff;
+        background-color: #e0e0e0;
     }
     table{
         border-collapse:collapse;
@@ -73,6 +77,12 @@ if ($conn) {
         /*display: none;*/
         float: right;
         border-radius: 3px;
+    }
+    .alter_bot div{
+        display: inline-block;
+        color: #549ac8;
+        cursor:pointer;
+        margin-right:7px;
     }
 </style>
 <script>

@@ -25,13 +25,12 @@ var change_right_mian = function(str){
     $("#product").css("background-color","transparent");
     $("#customer").css("background-color","transparent");
     $("#invoice").css("background-color","transparent");
-    var divdata = $.ajax({url:"./view/"+str+".php",async:false});
-    $("#r-table").html(divdata.responseText);
-    if(str=="product_view"){
-        str="product";
-    }else if(str=="customer_view"){
-        str="customer"
-    }
     $("#"+str).css("background-color","#bebebe");
+    if(str=="product"){
+        var divdata = $.ajax({url:"search/search"+str+".php",async:false});
+    }else{
+        var divdata = $.ajax({url:"search/search"+str+".html",async:false});
+    }
+    $("#r-table").html(divdata.responseText);
 }
 

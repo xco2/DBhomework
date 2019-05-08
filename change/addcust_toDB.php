@@ -8,7 +8,11 @@ if(isset($_POST)){
         $caddress=$_POST['caddress'];
         mysqli_select_db($conn, 'production_marketing') or die('指定的数据库不存在');
         if(isset($_GET['cno'])){//修改
-            $sql="UPDATE customer SET Cname=\"".$cname."\",Caddress=\"".$caddress."\",Ctel=\"".$ctel."\" WHERE cno=".$_GET['cno'].";";
+            if(isset($_POST['ccredit'])){
+                $sql="UPDATE customer SET Cname=\"".$cname."\",Caddress=\"".$caddress."\",Ctel=\"".$ctel."\",Ccredit=\"".$_POST['ccredit']."\" WHERE cno=".$_GET['cno'].";";
+            }else{
+                $sql="UPDATE customer SET Cname=\"".$cname."\",Caddress=\"".$caddress."\",Ctel=\"".$ctel."\" WHERE cno=".$_GET['cno'].";";
+            }
             $success="修改成功";
             $f="修改失败";
         }else{//增添

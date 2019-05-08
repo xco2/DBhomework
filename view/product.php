@@ -3,7 +3,7 @@ $conn = mysqli_connect('localhost', 'root', '');
 mysqli_set_charset($conn,'utf8');
 if ($conn) {
     mysqli_select_db($conn, 'production_marketing') or die('指定的数据库不存在');
-    $sql="SELECT * FROM Product;";
+    $sql="SELECT * FROM Product ORDER BY pno;";
 
     $amount =mysqli_query($conn, $sql);
     $row = mysqli_fetch_row($amount);
@@ -17,9 +17,8 @@ if ($conn) {
             <td>库存数量
                 <?php if(!isset($_GET['alter'])){?>
                 <div class="alter_bot">
-                    <a href="../add.php?choic=product">增添
-<!--                     <!--<img src="" alt="">-->
-                    </a>
+                    <div onclick="change_right_mian('product_view')">总销量排行</div>
+                    <a href="search.php?choic=product">筛选</a>
                 </div>
                 <?php }?>
             </td>
@@ -54,7 +53,7 @@ if ($conn) {
     td{
         height: 2em;
         width: 20em;
-        border:1px solid #c7e9ff;
+        border:1px solid #d3d3d3;
     }
     .num{
         width: 4em;
@@ -64,13 +63,13 @@ if ($conn) {
         width: auto;
     }
     tr:hover{
-         background-color: #97ddff !important;
+         background-color: #bebebe !important;
      }
     thead{
-        background-color: #97ddff !important;
+        background-color: #bebebe !important;
     }
     .dan{
-        background-color: #def3ff;
+        background-color: #e0e0e0;
     }
     table{
         border-collapse:collapse;
@@ -80,6 +79,12 @@ if ($conn) {
         /*display: none;*/
         float: right;
         border-radius: 3px;
+    }
+    .alter_bot div{
+        display: inline-block;
+        color: #549ac8;
+        cursor:pointer;
+        margin-right:7px;
     }
 </style>
 <script>

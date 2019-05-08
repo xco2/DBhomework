@@ -8,7 +8,7 @@ if(isset($_POST)){
         $ppaid=$_POST['ppaid'];
         mysqli_select_db($conn, 'production_marketing') or die('指定的数据库不存在');
         if(isset($_GET['ino'])){//修改
-            $sql="UPDATE invoice SET Cno=".$cno.",Itime=now(),Ccpm=".$ccmp.",Ppaid=".$ppaid." WHERE ino=".$_GET['ino'].";";
+            $sql="UPDATE invoice SET Cno=".$cno.",Ccpm=".$ccmp.",Ppaid=".$ppaid." WHERE ino=".$_GET['ino'].";";
             $success="修改成功,";
             $f="修改失败";
         }else {//增添
@@ -19,6 +19,9 @@ if(isset($_POST)){
         if(mysqli_query($conn, $sql)){
             $amount=mysqli_query($conn,"select last_insert_id()");
             $row = mysqli_fetch_row($amount);
+            if($row[0]=="0"){
+                $row[0]=$_GET['ino'];
+            }
             echo $success;
             echo "发票号为:".$row[0].",请继续录入详细信息";
         }else{

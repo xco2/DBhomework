@@ -13,10 +13,11 @@
     <div id="title_name">xxxx系统</div>
 </div>
 <div id="left-main">
-    <div id="invoice" class="fagucan" onclick="change_right_mian('invoice',-1)">发票</div>
-    <div id="product" class="fagucan" onclick="change_right_mian('product',-1)">产品</div>
-    <div id="customer" class="fagucan" onclick="change_right_mian('customer',-1)">顾客</div>
+    <div id="invoice" class="fagucan" onclick="change_right_mian('invoice',-1)">发&nbsp票</div>
+    <div id="product" class="fagucan" onclick="change_right_mian('product',-1)">产&nbsp品</div>
+    <div id="customer" class="fagucan" onclick="change_right_mian('customer',-1)">顾&nbsp客</div>
     <div id="back" class="fagucan"><a href="index.html"><div>返回查看</div></a></div>
+    <div id="search" class="fagucan"><a href="search.php"><div>搜索筛选</div></a></div>
 </div>
 <div id="right-main">
     <div id="r-form"></div>
@@ -32,9 +33,13 @@
     }
     if(isset($_GET['choic'])){
         if(isset($_GET['no'])){//跳转修改,no为格表主码
-            echo "change_right_mian('".$_GET['choic']."',".$_GET['no'].");";
-        }else{//普通插入
-            echo "change_right_mian('".$_GET['choic']."',-1);";
+            if(isset($_GET['withcust'])){//选择顾客号插入
+                echo "change_right_mian('".$_GET['choic']."',".$_GET['no'].", 1);";
+            }else{//修改
+                echo "change_right_mian('".$_GET['choic']."',".$_GET['no'].", 0);";
+            }
+        } else{//普通插入
+            echo "change_right_mian('".$_GET['choic']."',-1, 0);";
         }
     }
 

@@ -3,8 +3,39 @@ $conn = mysqli_connect('localhost', 'root', '');
 mysqli_set_charset($conn,'utf8');
 if ($conn) {
 mysqli_select_db($conn, 'production_marketing') or die('指定的数据库不存在');
-$sql="SELECT Ino,invoice.Cno,customer.Cname,Itime,Payment,Ccpm,Ppaid FROM invoice,customer WHERE invoice.Cno=customer.Cno ORDER BY ino;";
-
+$sql="SELECT Ino,invoice.Cno,customer.Cname,Itime,Payment,Ccpm,Ppaid FROM invoice,customer WHERE invoice.Cno=customer.Cno";
+$order="itime";
+    if(isset($_POST['ino'])){
+        $sql=$sql." AND invoice.ino = \"".$_POST['ino']."\"";
+    }
+    if(isset($_POST['cname'])){
+        $sql=$sql." AND cname LIKE \"%".$_POST['cname']."%\"";
+        $order="cname";
+    }
+    if(isset($_POST['payment_max'])){
+        $sql=$sql." AND payment <= ".$_POST['payment_max'];
+        $order="payment DESC";
+    }
+    if(isset($_POST['payment_min'])){
+        $sql=$sql." AND payment >= ".$_POST['payment_min'];
+        $order="payment DESC";
+    }
+    if(isset($_POST['itime_max'])){
+        $sql=$sql." AND itime <= \"".$_POST['itime_max']."\"";
+        $order="itime";
+    }
+    if(isset($_POST['itime_min'])){
+        $sql=$sql." AND itime >= \"".$_POST['itime_min']."\"";
+        $order="itime";
+    }
+    if(isset($_POST['all'])){
+        if($_POST['all']=="0"){
+            $sql=$sql." AND Payment>(Ccpm+Ppaid)";
+            $order="Payment DESC";
+        }
+    }
+    $sql=$sql." ORDER BY ".$order.";";
+//echo $sql;
 $amount =mysqli_query($conn, $sql);
 $row = mysqli_fetch_row($amount);
 ?>
@@ -17,13 +48,7 @@ $row = mysqli_fetch_row($amount);
     <td>开发日期</td>
     <td>应付金额</td>
     <td>预付款</td>
-    <td>已付金额
-        <div class="alter_bot">
-            <a href="search.php?choic=invoice">筛选
-                <!--<img src="" alt="">-->
-            </a>
-        </div>
-    </td>
+    <td>已付金额</td>
     </thead>
     <?php
     $i=1;

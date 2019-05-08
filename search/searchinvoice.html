@@ -1,0 +1,191 @@
+<div id="form_ofc">
+    <form action="" method="post" onsubmit="return false">
+        <div class="input-div" id="form_head" style="font-size: 25px;margin-top:0px;">搜索筛选</div>
+        <div class="input-div">
+            <label for="ino">发票号:</label>
+            <input type="text" name="ino" id="ino" placeholder="请输入发票号">
+        </div>
+        <div class="input-div">
+            <label for="cname">顾客名:</label>
+            <input type="text" name="cname" id="cname" placeholder="请输入顾客名">
+        </div>
+        <div class="input-div">
+            <label for="payment_max">应付金额范围:</label><br>
+            <input type="text" name="payment" id="payment_min" placeholder="请输入价格下界">
+            <input type="text" name="payment" id="payment_max" placeholder="请输入价格上界">
+        </div>
+        <div class="input-div">
+            <label for="itime_max">日期范围:</label><br>
+            <input type="datetime-local" name="itime" id="itime_min" placeholder="请输入时间下界">
+            <input type="datetime-local" name="itime" id="itime_max" placeholder="请输入时间上界">
+        </div>
+        <div class="input-div" id="radio">
+            <input type="radio" name="all" id="all" checked>显示全部
+            <input type="radio" name="all" id="some">仅显示未完成的交易
+        </div>
+        <button onclick="submitcust()">提&nbsp交</button>
+    </form>
+</div>
+<div id="request_div">
+
+</div>
+<style>
+    #form_ofc {
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom:25px;
+        padding: 10px;
+        height: auto;
+        width: 80%;
+        border: 3px solid #d3d3d3;
+        border-radius: 15px;
+        box-shadow: 20px 13px 20px 0px rgba(136, 136, 136, 0.51);
+    }
+
+    #request_div{
+        height: auto;
+        width: 100%;
+    }
+
+    form {
+        height: auto;
+    }
+
+    #form_head {
+        width: 100%;
+        margin: 0;
+        display: block;
+    }
+
+    .input-div {
+        width: 45%;
+        height: auto;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
+    #radio{
+        width: 100%;
+        height: 1.1em;
+        margin=0;
+    }
+
+    #radio input{
+        width: 2em;
+    }
+
+    label {
+        vertical-align: top;
+    }
+
+    input {
+        width: 70%;
+        height: 1.6em;
+        border: 1.5px solid #000000;
+        vertical-align: middle;
+    }
+
+    input:focus, select:focus {
+        outline-color: black;
+    }
+
+    select {
+        width: 40%;
+        height: 1.6em;
+        border: 1.5px solid #000000;
+        vertical-align: middle;
+    }
+
+    button {
+        width: 100%;
+        height: 35px;
+        color: white;
+        border: 1px solid #bebebe;
+        background-color: #bebebe;
+        border-radius: 15px;
+        position: relative;
+        font-size: 1em;
+        bottom: 0px;
+    }
+</style>
+<script>
+    var submitcust = function () {
+        var ino = document.getElementById("ino");
+        var cname = document.getElementById("cname");
+        var payment_max = document.getElementById("payment_max");
+        var payment_min = document.getElementById("payment_min");
+        var itime_max = document.getElementById("itime_max");
+        var itime_min = document.getElementById("itime_min");
+        var all = document.getElementById("all");
+        var request_div = document.getElementById("request_div");
+        payment_max.style.borderColor="black";
+        payment_min.style.borderColor="black";
+        itime_max.style.borderColor="black";
+        itime_min.style.borderColor="black";
+        var checkmax_min=1;
+        var datas="";
+        if(all.checked){
+            datas="all=1";
+        }else{
+            datas="all=0";
+        }
+        if(ino.value){
+            datas = datas+"&ino="+ino.value;
+        }
+        if (cname.value) {
+            datas = datas+"&cname="+cname.value;
+        }
+        if(payment_max.value&&payment_min.value&&(parseInt(payment_max.value)<parseInt(payment_min.value))){
+            payment_max.style.borderColor="#ff536f";
+            payment_min.style.borderColor="#ff536f";
+            get_div.innerHTML="*请保证最大值大于等于最小值";
+            checkmax_min=0;
+        }
+        if (payment_max.value) {
+            if(parseInt(payment_max.value)<0){
+                payment_max.style.borderColor="#ff536f";
+                get_div.innerHTML="*请保证金额大于0";
+                checkmax_min=0;
+            }else{
+                datas = datas+"&payment_max="+payment_max.value;
+            }
+        }
+        if (payment_min.value) {
+            if(parseInt(payment_min.value)<0){
+                payment_min.style.borderColor="#ff536f";
+                get_div.innerHTML="*请保证金额大于0";
+                checkmax_min=0;
+            }else{
+                datas = datas+"&payment_min="+payment_min.value;
+            }
+        }
+        if(itime_max.value&&itime_min.value&&itime_max.value<itime_min.value){
+            itime_max.style.borderColor="#ff536f";
+            itime_min.style.borderColor="#ff536f";
+            get_div.innerHTML="*请保证最大值大于等于最小值";
+            checkmax_min=0;
+        }
+        if (itime_max.value) {
+            datas = datas+"&itime_max="+itime_max.value;
+        }
+        if (itime_min.value) {
+            datas = datas+"&itime_min="+itime_min.value;
+        }
+        if(checkmax_min){
+        // alert(datas);
+        // if(0){
+            $.ajax({
+                url: "search/searchinvo_formDB.php",
+                type: 'post',
+                timeout: 180000,
+                data: datas,
+                success: function (data) {
+                    request_div.innerHTML = data;
+                },
+                error: function (res, error) {
+                    alert('发生错误');
+                }
+            });
+        }
+    }
+</script>

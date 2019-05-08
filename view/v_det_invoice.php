@@ -3,7 +3,7 @@ $conn = mysqli_connect('localhost', 'root', '');
 mysqli_set_charset($conn,'utf8');
 if ($conn) {
     mysqli_select_db($conn, 'production_marketing') or die('指定的数据库不存在');
-    $sql="SELECT invoice_product.Pno,Pname,Pay_amount,Pprice FROM invoice_product,product WHERE invoice_product.Pno=product.Pno AND invoice_product.Ino=".$_GET['ino'];
+    $sql="SELECT invoice_product.Pno,Pname,Pay_amount,iprice FROM invoice_product,product WHERE invoice_product.Pno=product.Pno AND invoice_product.Ino=".$_GET['ino'].";";
     $amount =mysqli_query($conn, $sql)or die('指定的数据不存在');
     $row = mysqli_fetch_row($amount);
 ?>
@@ -38,7 +38,7 @@ if ($conn) {
     $row = mysqli_fetch_row($amount);
         ?>
         <tr></tr>
-        <tr><td>订单信息</td></tr>
+        <tr><td>发票信息</td></tr>
         <tr class="dan">
             <td class="num">客户号</td>
             <td>客户姓名</td>
@@ -63,7 +63,7 @@ if ($conn) {
     td{
         height: 2em;
         width: 20em;
-        border:1px solid #c7e9ff;
+        border:1px solid #d3d3d3;
         padding: 0;
     }
     .num{
@@ -74,13 +74,13 @@ if ($conn) {
         width: auto;
     }
     tr:hover{
-        background-color: #97ddff !important;
+        background-color: #bebebe !important;
     }
     thead{
-        background-color: #97ddff !important;
+        background-color: #bebebe !important;
     }
     .dan{
-        background-color: #def3ff;
+        background-color: #e0e0e0;
     }
     table{
         border-collapse:collapse;
